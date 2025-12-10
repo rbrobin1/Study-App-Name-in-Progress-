@@ -1,3 +1,4 @@
+import { child } from '@react-native-firebase/storage';
 import axios from 'axios';
 
 const AUTH_URL = "https://fantastic-study-app-default-rtdb.firebaseio.com";
@@ -45,4 +46,9 @@ export async function getQuestions(){
 
     return quizzes;
 
+
+}
+
+export async function updateQuestions(id, quizData){
+    return axios.put(DATABASE_URL + "/quiz/" + id + ".json", quizData);
 }
