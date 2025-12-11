@@ -1,22 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-function Home({navigation}){
+function Home({ navigation }) {
 
 
-    return(
+  return (
 
-        <View style = {styles.container}>
-            <Text style = {styles.text}>Home Screen</Text>
-            <Button title = "Start Studying!" onPress = {() => {navigation.navigate("Create")}}></Button>
-            <Button title = "Joint Study" onPress = {() => {navigation.navigate("Join")}}></Button>
-            <Button title = "Log Out" onPress = {() => {navigation.navigate("Login")}}></Button>
+    <View style={styles.container}>
+      <Image source={require("../assets/reading.png")} style={styles.image}/>
+      
+      <View style={styles.button}>
+        <Button title = "Start Studying!" onPress = {() => {navigation.navigate("Create")}}></Button>
+      </View>
+     
+      <View style={styles.button}>
+        <Button title="Join Study" onPress={() => navigation.navigate("Join")} />
+      </View>
 
+     <View style={styles.button}>
+      <Button title="Log Out" onPress={() => navigation.navigate("Login")} />
+    </View>
 
-        </View>
+    </View>
 
-    );
+  );
 
 }
 
@@ -40,6 +48,18 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
   },
+
+  image: {
+  width: 240,
+  height: 240,
+  marginBottom: 60,
+  marginTop: -180,
+  },
+  
+  button: {
+  marginVertical: 10,   
+  width: "70%",        
+}
 });
 
 export default Home;
