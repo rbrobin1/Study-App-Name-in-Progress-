@@ -2,9 +2,28 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, Pressable } from 'react-native';
 import Flatbutton from '../components/Flatbutton';
 import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
+import {getAuth, onAuthStateChanged, signInWithEmailAndPassword} from  'firebase/auth';
+import {auth} from '../services/firebase';
+
+
 
 
 function Login({navigation}){
+   const [email, setEmail] = useState('');
+   const [password, setPassword] = useState('');
+
+   async function loginHandler(){
+    
+    try{
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      const credentials = user.credentials;
+
+    } catch(error){
+      console.error('login error', error)
+
+    }
+  }
 
 
     return(
@@ -19,13 +38,21 @@ function Login({navigation}){
 
 
             <Text style = {styles.text}>Enter Username</Text>
-            <TextInput style = {styles.inputView}/>
+            <TextInput style = {styles.inputView}
+            value = {email}
+            onChangeText = {(text) => setEmail(text)}
+            
+            />
 
 
 
 
             <Text style = {styles.text}>Enter Password</Text>
-            <TextInput style = {styles.inputView}/>
+            <TextInput style = {styles.inputView}
+            value = {password}
+            onChangeText = {(text) => setPassword(text)}
+            
+            />
 
   
 
@@ -36,7 +63,7 @@ function Login({navigation}){
 
             </View>
 
-            <Button title = "Home" onPress = {() => {navigation.navigate("Home")}}></Button>
+            <Button title = "Home" onPress = {() => {navigation.navigate("Home"), loginHandler}}></Button>
 
 
         </View>

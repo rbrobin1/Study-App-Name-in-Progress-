@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { getAuth, signOut } from 'firebase/auth';
 
 function Home({navigation}){
 
@@ -11,7 +12,7 @@ function Home({navigation}){
             <Text style = {styles.text}>Home Screen</Text>
             <Button title = "Start Studying!" onPress = {() => {navigation.navigate("Create")}}></Button>
             <Button title = "Joint Study" onPress = {() => {navigation.navigate("Join")}}></Button>
-            <Button title = "Log Out" onPress = {() => {navigation.navigate("Login")}}></Button>
+            <Button title = "Log Out" onPress = {() => {navigation.navigate("Login"), signOut(getAuth())}}></Button>
 
 
         </View>
